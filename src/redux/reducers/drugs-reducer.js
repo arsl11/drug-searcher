@@ -19,25 +19,6 @@ let initialState = {
             ],
             categories: ["anti bug"]
         },
-        {
-            id: 2,
-            name: "Bug Destroyer",
-            availableVolumes: [
-                {
-                    liters: 1,
-                    priceRub: 99.90
-                },
-                {
-                    liters: 3,
-                    priceRub: 249.90
-                },
-                {
-                    liters: 5,
-                    priceRub: 399.90
-                }
-            ],
-            categories: ["anti bug"]
-        }
     ]
 }
 
