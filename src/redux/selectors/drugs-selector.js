@@ -22,3 +22,7 @@ export const getDrugsByLiter = createSelector(getDrugs, (drugs) => {
 
     return newDrugs;
 });
+
+
+
+
