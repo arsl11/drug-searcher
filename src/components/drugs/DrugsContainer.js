@@ -1,11 +1,11 @@
 import Drugs from "./Drugs";
 import {compose} from "redux";
 import {connect} from "react-redux";
-import {getDrugsByLiter} from "../../redux/selectors/drugs-selector";
+import {getDrugs} from "../../redux/selectors/drugs-selector";
 
 let mapStateToProps = (state) => {
     return {
-        drugs: getDrugsByLiter(state)
+        drugs: getDrugs(state)
     }
 }
 

@@ -1,10 +1,14 @@
 const Drug = (props) => {
     return (
         <div className='drug'>
-            <span className='name'>{props.name}, </span>
-            <span className='liter'>{props.liter}, </span>
-            <span className='price'>{props.price}, </span>
-            <span className='category'>{props.category}</span>
+            {props.availableVolumes.map(volume => {
+                return <div>
+                    <span>{props.name}, </span>
+                    <span>{volume.liters}, </span>
+                    <span>{volume.priceRub}, </span>
+                    <span>{props.category}</span>
+                </div>
+            })}
         </div>
     );
 }

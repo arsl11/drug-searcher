@@ -19,6 +19,21 @@ let initialState = {
             ],
             categories: ["anti bug"]
         },
+        {
+            id: 2,
+            name: 'Acetaminophen',
+            availableVolumes: [
+                {
+                    liters: 1,
+                    priceRub: 50.90
+                },
+                {
+                    liters: 2,
+                    priceRub: 79.90
+                },
+            ],
+            categories: ['analgesics']
+        }
     ]
 }
 
