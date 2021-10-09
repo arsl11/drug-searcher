@@ -33,7 +33,19 @@ let initialState = {
                 },
             ],
             categories: ['analgesics']
+        },
+        {
+            id: 3,
+            name: 'Butofan',
+            availableVolumes: [
+                {
+                    liters: 0.1,
+                    priceRub: 650.00
+                },
+            ],
+            categories: ['stimulant']
         }
+
     ]
 }
 

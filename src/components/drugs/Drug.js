@@ -1,15 +1,15 @@
+import {TableCell, TableRow} from "@mui/material";
+
 const Drug = (props) => {
     return (
-        <div className='drug'>
-            {props.availableVolumes.map(volume => {
-                return <div>
-                    <span>{props.name}, </span>
-                    <span>{volume.liters}, </span>
-                    <span>{volume.priceRub}, </span>
-                    <span>{props.category}</span>
-                </div>
-            })}
-        </div>
+        props.availableVolumes.map(volume => {
+            return <TableRow key={props.id}>
+                <TableCell>{props.name}</TableCell>
+                <TableCell>{volume.liters}</TableCell>
+                <TableCell>{volume.priceRub}</TableCell>
+                <TableCell>{props.category}</TableCell>
+            </TableRow>
+        })
     );
 }
 
