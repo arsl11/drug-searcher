@@ -32,7 +32,7 @@ const Drugs = (props) => {
     let drugs = filteredDrugs.map(d => <Drug key={d.id} id={d.id}
                                              name={d.name}
                                              availableVolumes={d.availableVolumes}
-                                             category={d.categories} addDrug={props.addDrug} drugs={props.drugs}/>)
+                                             category={d.categories} addDrug={props.addDrug}/>)
 
     return (
         <div>
