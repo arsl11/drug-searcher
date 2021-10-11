@@ -3,6 +3,7 @@ import {useState} from "react";
 import {Field, reduxForm} from "redux-form";
 import {Input} from "../common/FormControls/FormControls";
 import {Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
+import {Cart} from "./Cart";
 
 
 const SearchForm = (props) => {
@@ -31,7 +32,7 @@ const Drugs = (props) => {
     let drugs = filteredDrugs.map(d => <Drug key={d.id} id={d.id}
                                              name={d.name}
                                              availableVolumes={d.availableVolumes}
-                                             category={d.categories}/>)
+                                             category={d.categories} addDrug={props.addDrug} drugs={props.drugs}/>)
 
     return (
         <div>
@@ -49,6 +50,7 @@ const Drugs = (props) => {
                     <TableBody>{drugs}</TableBody>
                 </Table>
             </TableContainer>
+            <Cart cartDrugs={props.cartDrugs}/>
         </div>
     )
 
