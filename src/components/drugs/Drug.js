@@ -13,7 +13,7 @@ const Drug = (props) => {
                     let newDrug = {
                         id: props.id + volume.liters,
                         name: props.name,
-                        liters: volume.liters,
+                        liter: volume.liters,
                         price: volume.priceRub
                     }
                     props.addDrug(newDrug)

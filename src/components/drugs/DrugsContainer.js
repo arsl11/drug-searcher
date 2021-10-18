@@ -2,7 +2,7 @@ import Drugs from "./Drugs";
 import {compose} from "redux";
 import {connect} from "react-redux";
 import {getDrugs} from "../../redux/selectors/drugs-selector";
-import {addDrugActionCreator} from "../../redux/reducers/cart-reducer";
+import {addDrugActionCreator, deleteDrugActionCreator} from "../../redux/reducers/cart-reducer";
 
 let mapStateToProps = (state) => {
     return {
@@ -15,6 +15,9 @@ let mapDispatchToProps = (dispatch) => {
     return {
         addDrug: (drug) => {
             dispatch(addDrugActionCreator(drug))
+        },
+        deleteDrug: (drug) => {
+            dispatch(deleteDrugActionCreator(drug))
         }
     }
 }

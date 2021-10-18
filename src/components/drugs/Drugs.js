@@ -23,7 +23,7 @@ const Drugs = (props) => {
     let [value, setValue] = useState('')
 
     let filteredDrugs = props.drugs.filter(drug => {
-        if (value == undefined) {
+        if (value === undefined) {
             value = ''
         }
         return drug.name.toLowerCase().includes(value.toLowerCase())
@@ -50,7 +50,7 @@ const Drugs = (props) => {
                     <TableBody>{drugs}</TableBody>
                 </Table>
             </TableContainer>
-            <Cart cartDrugs={props.cartDrugs}/>
+            <Cart cartDrugs={props.cartDrugs} deleteDrug={props.deleteDrug}/>
         </div>
     )
 
