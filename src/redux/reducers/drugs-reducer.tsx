@@ -1,4 +1,20 @@
-let initialState = {
+type VolumeType = {
+    liters: number,
+    priceRub: number
+}
+
+type DrugType = {
+    id: number,
+    name: string,
+    availableVolumes: Array<VolumeType>,
+    categories: Array<string>
+}
+
+type InitialStateType = {
+    drugs: Array<DrugType>
+}
+
+let initialState : InitialStateType = {
     drugs: [
         {
             id: 1,
@@ -49,7 +65,7 @@ let initialState = {
     ]
 }
 
-const drugsReducer = (state = initialState, action) => {
+const drugsReducer = (state = initialState, action: any) => {
     return state;
 }
 
