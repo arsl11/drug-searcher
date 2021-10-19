@@ -32,7 +32,7 @@ const Drugs = (props) => {
     let drugs = filteredDrugs.map(d => <Drug key={d.id} id={d.id}
                                              name={d.name}
                                              availableVolumes={d.availableVolumes}
-                                             category={d.categories} addDrug={props.addDrug}/>)
+                                             category={d.categories} addDrug={props.addDrug} />)
 
     return (
         <div>
@@ -50,7 +50,7 @@ const Drugs = (props) => {
                     <TableBody>{drugs}</TableBody>
                 </Table>
             </TableContainer>
-            <Cart cartDrugs={props.cartDrugs} deleteDrug={props.deleteDrug}/>
+            <Cart cartDrugs={props.cartDrugs} deleteDrug={props.deleteDrug} setAmount={props.setAmount}/>
         </div>
     )
 

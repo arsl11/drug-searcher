@@ -19,6 +19,10 @@ export const Cart = (props) => {
                 {props.cartDrugs.map(drug => {
                     return <div>
                         {drug.name}, {drug.price}, {drug.liter}
+                        <button onClick={() => {props.setAmount(drug, drug.amount + 1)}}>+</button>{drug.amount}
+                        {   drug.amount > 0 ?
+                            <button onClick={() => {props.setAmount(drug, drug.amount - 1)}}>-</button> : null
+                        }
                         <button onClick={() => {props.deleteDrug(drug)}}>Delete</button>
                     </div>
                 })}

@@ -1,11 +1,13 @@
 const ADD_DRUG = 'ADD_DRUG'
 const DELETE_DRUG = 'DELETE_DRUG'
+const SET_AMOUNT = 'SET_AMOUNT'
 
 type CartDrugType = {
     id: number,
     name: string,
     liter: number,
-    price: number
+    price: number,
+    amount: number
 }
 
 type InitialStateType = {
@@ -19,6 +21,11 @@ let initialState: InitialStateType = {
 export const cartReducer = (state = initialState, action: any) => {
     switch (action.type) {
         case ADD_DRUG:
+            if (state.drugs.find(drug => drug.liter === action.drug.liter && drug.name === action.drug.name)) {
+                return {
+                    ...state,
+                }
+            }
             return {
                 ...state,
                 drugs: [...state.drugs, action.drug]
@@ -29,6 +36,19 @@ export const cartReducer = (state = initialState, action: any) => {
                 drugs: [...state.drugs.filter((drug) => {
                     return drug !== action.drug
                 })]
+            }
+        case SET_AMOUNT:
+            return {
+                ...state,
+                drugs: state.drugs.map((drug) => {
+                    if (drug === action.drug) {
+                        return {
+                            ...drug,
+                            amount: action.value < 0 ? 0 : action.value
+                        }
+                    }
+                    return drug
+                })
             }
         default:
             return state
@@ -41,11 +61,13 @@ type addDrugActionType = {
     drug: CartDrugType
 
 }
-export const addDrugActionCreator = (drug: CartDrugType) : addDrugActionType => ({type: ADD_DRUG, drug})
+export const addDrug = (drug: CartDrugType) : addDrugActionType => ({type: ADD_DRUG, drug})
 
 type deleteDrugActionType = {
     type: typeof DELETE_DRUG,
     drug: CartDrugType
 
 }
-export const deleteDrugActionCreator = (drug: CartDrugType) : deleteDrugActionType=> ({type: DELETE_DRUG, drug})
+export const deleteDrug = (drug: CartDrugType) : deleteDrugActionType => ({type: DELETE_DRUG, drug})
+
+export const setAmount = (drug: CartDrugType, value: number) => ({type: SET_AMOUNT, drug, value})
