@@ -44,7 +44,7 @@ export const cartReducer = (state = initialState, action: any) => {
                     if (drug === action.drug) {
                         return {
                             ...drug,
-                            amount: action.value < 0 ? 0 : action.value
+                            amount: action.value < 1 ? 1 : action.value
                         }
                     }
                     return drug
