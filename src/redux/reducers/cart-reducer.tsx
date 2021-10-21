@@ -1,3 +1,5 @@
+import store from "../store";
+
 const ADD_DRUG = 'ADD_DRUG'
 const DELETE_DRUG = 'DELETE_DRUG'
 const SET_AMOUNT = 'SET_AMOUNT'
@@ -14,9 +16,14 @@ type InitialStateType = {
     drugs: Array<CartDrugType>
 }
 
-let initialState: InitialStateType = {
+const persistedState = localStorage.getItem('cartState')
+    ? JSON.parse(localStorage.getItem('cartState') as string)
+    : null
+
+let initialState : InitialStateType = persistedState ? persistedState : {
     drugs: []
 }
+
 
 export const cartReducer = (state = initialState, action: any) => {
     switch (action.type) {

@@ -1,8 +1,7 @@
-import {applyMiddleware, combineReducers, createStore} from "redux";
+import {combineReducers, createStore} from "redux";
 import drugsReducer from "./reducers/drugs-reducer";
 import { reducer as formReducer} from 'redux-form'
 import {cartReducer} from "./reducers/cart-reducer";
-import thunkMiddleware from 'redux-thunk'
 
 let reducers = combineReducers({
    drugsPage: drugsReducer,
@@ -10,6 +9,10 @@ let reducers = combineReducers({
    cartPage: cartReducer
 });
 
-let store = createStore(reducers, applyMiddleware(thunkMiddleware));
+let store = createStore(reducers);
+
+store.subscribe(() => {
+   localStorage.setItem('cartState', JSON.stringify(store.getState().cartPage))
+})
 
 export default store;

@@ -8,8 +8,6 @@ export const Cart = (props) => {
         count += props.cartDrugs[i].amount
     }
 
-
-
     return (
         <div>
             <div className='sum'>

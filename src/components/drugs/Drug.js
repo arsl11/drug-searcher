@@ -1,4 +1,4 @@
-import {TableCell, TableRow} from "@mui/material";
+import {Button, TableCell, TableRow} from "@mui/material";
 
 const Drug = (props) => {
 
@@ -9,7 +9,7 @@ const Drug = (props) => {
                 <TableCell>{volume.liters}</TableCell>
                 <TableCell>{volume.priceRub}</TableCell>
                 <TableCell>{props.category}</TableCell>
-                <TableCell><button onClick={() => {
+                <TableCell><Button variant='contained' onClick={() => {
                     let newDrug = {
                         id: props.id + volume.liters,
                         name: props.name,
@@ -18,7 +18,7 @@ const Drug = (props) => {
                         amount: 1
                     }
                     props.addDrug(newDrug)
-                }}>Add</button></TableCell>
+                }}>Add</Button></TableCell>
             </TableRow>
         })
     );

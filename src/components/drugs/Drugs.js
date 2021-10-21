@@ -3,7 +3,6 @@ import {useState} from "react";
 import {Field, reduxForm} from "redux-form";
 import {Input} from "../common/FormControls/FormControls";
 import {Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
-import {Cart} from "../cart/Cart";
 
 
 const SearchForm = (props) => {
@@ -50,7 +49,6 @@ const Drugs = (props) => {
                     <TableBody>{drugs}</TableBody>
                 </Table>
             </TableContainer>
-            <a href='/cart'>Cart</a>
         </div>
     )
 
