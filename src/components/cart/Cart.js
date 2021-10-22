@@ -1,3 +1,5 @@
+import {Button, Paper, Table, TableCell, TableContainer, TableRow} from "@mui/material";
+
 export const Cart = (props) => {
 
     let sum = 0
@@ -9,25 +11,46 @@ export const Cart = (props) => {
     }
 
     return (
-        <div>
-            <div className='sum'>
-                {sum / 100}
-            </div>
-            <div className='count'>
-                {count}
-            </div>
-            <div className='cartDrugs'>
-                {props.cartDrugs.map(drug => {
-                    return <div>
-                        {drug.name}, {drug.price * drug.amount / 100}, {drug.liter}
-                        <button onClick={() => {props.setAmount(drug, drug.amount + 1)}}>+</button>{drug.amount}
-                        {   drug.amount > 1 ?
-                            <button onClick={() => {props.setAmount(drug, drug.amount - 1)}}>-</button> : null
-                        }
-                        <button onClick={() => {props.deleteDrug(drug)}}>Delete</button>
+        <TableContainer component={Paper}>
+            <Table>
+                <div>
+                    <div className='cartDrugs'>
+                        {props.cartDrugs.map(drug => {
+                            return <TableRow>
+                                <TableCell>{drug.name}</TableCell>
+                                <TableCell>{drug.price * drug.amount / 100}&nbsp;Rub.</TableCell>
+                                <TableCell>{drug.liter}&nbsp;l.</TableCell>
+                                <TableCell>
+                                    <Button variant='text' onClick={() => {
+                                        props.setAmount(drug, drug.amount + 1)
+                                    }}>+
+                                    </Button>
+                                    {drug.amount}
+                                    <Button disabled={drug.amount <= 1} variant='text' onClick={() => {
+                                        props.setAmount(drug, drug.amount - 1)
+                                    }}>-</Button>
+                                </TableCell>
+                                <TableCell>
+                                    <Button variant='contained' onClick={() => {
+                                        props.deleteDrug(drug)
+                                    }}>Delete
+                                    </Button>
+                                </TableCell>
+                            </TableRow>
+                        })}
                     </div>
-                })}
-            </div>
-        </div>
+                    <TableCell>
+                        <div className='sum'>
+                            Total sum: {sum / 100}&nbsp;Rub.
+                        </div>
+                    </TableCell>
+                    <TableCell>
+                        <div className='count'>
+                            Total amount: {count}
+                        </div>
+                    </TableCell>
+                </div>
+            </Table>
+        </TableContainer>
     )
 }
