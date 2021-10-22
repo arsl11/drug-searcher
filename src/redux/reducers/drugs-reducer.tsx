@@ -56,7 +56,7 @@ let initialState : InitialStateType = {
             availableVolumes: [
                 {
                     liters: 0.1,
-                    priceRub: 650.00
+                    priceRub: 650.90
                 },
             ],
             categories: ['stimulant']

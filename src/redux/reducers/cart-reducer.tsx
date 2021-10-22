@@ -1,5 +1,3 @@
-import store from "../store";
-
 const ADD_DRUG = 'ADD_DRUG'
 const DELETE_DRUG = 'DELETE_DRUG'
 const SET_AMOUNT = 'SET_AMOUNT'
