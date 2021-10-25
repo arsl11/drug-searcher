@@ -1,13 +1,10 @@
-type VolumeType = {
-    liters: number,
-    priceRub: number
-}
-
 type DrugType = {
     id: number,
     name: string,
-    availableVolumes: Array<VolumeType>,
+    liters: number,
+    priceRub: number,
     categories: Array<string>
+
 }
 
 type InitialStateType = {
@@ -19,49 +16,46 @@ let initialState : InitialStateType = {
         {
             id: 1,
             name: "Bug Destroyer",
-            availableVolumes: [
-                {
-                    liters: 1,
-                    priceRub: 99.90
-                },
-                {
-                    liters: 3,
-                    priceRub: 249.90
-                },
-                {
-                    liters: 5,
-                    priceRub: 399.90
-                }
-            ],
-            categories: ["anti bug"]
+            liters: 1,
+            priceRub: 99.90,
+            categories: ['bug', "anti bug"]
         },
         {
             id: 2,
+            name: "Bug Destroyer",
+            liters: 3,
+            priceRub: 249.90,
+            categories: ['bug', "anti bug"]
+        },
+
+        {
+            id: 3,
+            name: "Bug Destroyer",
+            liters: 5,
+            priceRub: 399.90,
+            categories: ['bug', "anti bug"]
+        },
+        {
+            id: 4,
             name: 'Acetaminophen',
-            availableVolumes: [
-                {
-                    liters: 1,
-                    priceRub: 50.90
-                },
-                {
-                    liters: 2,
-                    priceRub: 79.90
-                },
-            ],
+            liters: 1,
+            priceRub: 50.90,
             categories: ['analgesics']
         },
         {
-            id: 3,
+            id: 5,
+            name: 'Acetaminophen',
+            liters: 2,
+            priceRub: 79.90,
+            categories: ['analgesics']
+        },
+        {
+            id: 6,
             name: 'Butofan',
-            availableVolumes: [
-                {
-                    liters: 0.1,
-                    priceRub: 650.90
-                },
-            ],
+            liters: 1,
+            priceRub: 100.90,
             categories: ['stimulant']
         }
-
     ]
 }
 

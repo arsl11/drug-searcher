@@ -26,7 +26,7 @@ let initialState : InitialStateType = persistedState ? persistedState : {
 export const cartReducer = (state = initialState, action: any) => {
     switch (action.type) {
         case ADD_DRUG:
-            if (state.drugs.find(drug => drug.liter === action.drug.liter && drug.name === action.drug.name)) {
+            if (state.drugs.find(drug => drug.id === action.drug.id)) {
                 return {
                     ...state,
                 }
@@ -39,14 +39,14 @@ export const cartReducer = (state = initialState, action: any) => {
             return {
                 ...state,
                 drugs: [...state.drugs.filter((drug) => {
-                    return drug !== action.drug
+                    return drug.id !== action.drug.id
                 })]
             }
         case SET_AMOUNT:
             return {
                 ...state,
                 drugs: state.drugs.map((drug) => {
-                    if (drug === action.drug) {
+                    if (drug.id === action.drug.id) {
                         return {
                             ...drug,
                             amount: action.value < 1 ? 1 : action.value

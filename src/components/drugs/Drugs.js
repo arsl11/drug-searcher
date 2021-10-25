@@ -9,10 +9,7 @@ const Drugs = (props) => {
         return drug.name.toLowerCase().includes(inputDrugName.toLowerCase())
     })
 
-    let drugs = filteredDrugs.map(d => <Drug key={d.id} id={d.id}
-                                             name={d.name}
-                                             availableVolumes={d.availableVolumes}
-                                             category={d.categories} addDrug={props.addDrug} />)
+    let drugs = filteredDrugs.map(d => <Drug key={d.id} id={d.id} name={d.name} liters={d.liters} priceRub={d.priceRub} categories={d.categories} addDrug={props.addDrug} />)
 
     return (
         <div>
