@@ -5,8 +5,8 @@ const SET_AMOUNT = 'SET_AMOUNT'
 type CartDrugType = {
     id: number,
     name: string,
-    liter: number,
-    price: number,
+    liters: number,
+    priceRub: number,
     amount: number
 }
 
