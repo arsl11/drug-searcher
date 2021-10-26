@@ -1,5 +1,13 @@
 import {useQuery} from "react-query";
 
+type Drug = {
+    id: number,
+    name: string,
+    liters: number,
+    priceRub: number,
+    categories: Array<string>
+}
+
 const initialDrugs = [
     {
         id: 1,
@@ -46,7 +54,18 @@ const initialDrugs = [
     }
 ]
 
-export default function useDrugs() {
+type TFetchDrugs = (inputDrugName: string) => Promise<Drug[]>
 
-    return useQuery(['drugs', 'filteredDrugs'], () => {return initialDrugs});
+let fetchDrugs: TFetchDrugs = (inputDrugName) => {
+    let filteredDrugs = initialDrugs.filter(drug => {
+        return drug.name.toLowerCase().includes(inputDrugName.toLowerCase())
+    })
+    return new Promise((resolve, reject) => {
+        setTimeout(() => resolve(filteredDrugs), 5000)
+    })
+}
+
+export default function useDrugs(inputDrugName: string) {
+
+    return useQuery<Drug[]>(['drugs', inputDrugName], () => fetchDrugs(inputDrugName));
 }
