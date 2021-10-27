@@ -2,51 +2,34 @@ import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import {CircularProgress, Link} from "@mui/material";
-import {Field, getFormValues, reduxForm} from "redux-form";
-import {Input} from "./common/FormControls/FormControls";
-import {withRouter} from "react-router-dom";
+import {CircularProgress, Link, TextField} from "@mui/material";
+import {withRouter} from "react-router";
+import {useStore} from "../zustand-store";
 import useDrugs from "../hooks/useDrugs";
-import {connect} from "react-redux";
-
-let mapStateToProps = (state) => {
-    return {
-        formState: getFormValues('searchDrugForm')(state)
-    }
-}
-
-const SearchForm = (props) => {
-
-    let inputDrugName = props.formState?.inputDrugName
-    let {isFetching} = useDrugs(inputDrugName)
-
-    return (
-        <div>
-            <form onChange={props.change}>
-                <Field component={Input} placeholder={'Search...'} name='inputDrugName' />
-                {isFetching && <CircularProgress color="secondary"/>}
-            </form>
-        </div>
-    );
-}
-
-const SearchDrugForm = reduxForm({form: 'searchDrugForm', initialValues: {inputDrugName: '',},})(SearchForm)
-
-const ConnectedSearchDrugForm = connect(mapStateToProps, {})(SearchDrugForm)
-
 
 
 const NavBar = (props) => {
+
+    const searchText = useStore(state => state.searchText)
+    const {isFetching} = useDrugs(searchText)
+    const setSearchText = useStore(state => state.setSearchText)
+
+    let handleChange = (e) => {
+        setSearchText(e.target.value)
+    }
 
     return (
         <AppBar position="static">
             <Toolbar>
                 <Typography variant="h6" component="div" color='inherit' sx={{mr: 2}}>DrugSearcher</Typography>
-                {props.location.pathname === '/catalogue' &&
-                    <ConnectedSearchDrugForm />
-                }
                 <Link href='/catalogue' color='inherit' underline='none' sx={{mr: 2}}>Catalogue</Link>
                 <Link href='/cart' color='inherit' underline='none' sx={{mr: 2}}>Cart</Link>
+                {props.location.pathname === '/catalogue' &&
+                    <form onChange={handleChange}>
+                        <TextField placeholder='Search...' defaultValue='' variant='standard' sx={{mr: 2}}/>
+                    </form>
+                }
+                {isFetching && <CircularProgress color='secondary'/>}
             </Toolbar>
         </AppBar>
     );

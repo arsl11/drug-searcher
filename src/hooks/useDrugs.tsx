@@ -7,6 +7,7 @@ type Drug = {
     priceRub: number,
     categories: Array<string>
 }
+type TFetchDrugs = (inputDrugName: string) => Promise<Drug[]>
 
 const initialDrugs = [
     {
@@ -54,14 +55,12 @@ const initialDrugs = [
     }
 ]
 
-type TFetchDrugs = (inputDrugName: string) => Promise<Drug[]>
-
 let fetchDrugs: TFetchDrugs = (inputDrugName) => {
     let filteredDrugs = initialDrugs.filter(drug => {
         return drug.name.toLowerCase().includes(inputDrugName.toLowerCase())
     })
     return new Promise((resolve, reject) => {
-        setTimeout(() => resolve(filteredDrugs), 5000)
+        setTimeout(() => resolve(filteredDrugs), 1000)
     })
 }
 
