@@ -7,6 +7,13 @@ import {withRouter} from "react-router";
 import {useStore} from "../zustand-store";
 import useDrugs from "../hooks/useDrugs";
 
+function debounce(func, timeout = 300){
+    let timer;
+    return (...args) => {
+        clearTimeout(timer);
+        timer = setTimeout(() => { func.apply(this, args); }, timeout);
+    };
+}
 
 const NavBar = (props) => {
 
@@ -25,8 +32,8 @@ const NavBar = (props) => {
                 <Link href='/catalogue' color='inherit' underline='none' sx={{mr: 2}}>Catalogue</Link>
                 <Link href='/cart' color='inherit' underline='none' sx={{mr: 2}}>Cart</Link>
                 {props.location.pathname === '/catalogue' &&
-                    <form onChange={handleChange}>
-                        <TextField placeholder='Search...' defaultValue='' variant='standard' sx={{mr: 2}}/>
+                    <form onChange={debounce(handleChange)}>
+                        <TextField placeholder='Search...' defaultValue='' variant='standard' sx={{mr: 2}} />
                     </form>
                 }
                 {isFetching && <CircularProgress color='secondary'/>}
