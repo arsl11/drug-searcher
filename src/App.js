@@ -1,14 +1,14 @@
 import {Route} from "react-router-dom";
-import DrugsContainer from "./components/drugs/DrugsContainer";
-import CartContainer from "./components/cart/CartContainer";
+import Drugs from "./components/drugs/Drugs";
 import NavBar from "./components/NavBar";
+import {Cart} from "./components/cart/Cart";
 
 function App() {
     return (
         <div className="App">
             <NavBar />
-            <Route path='/catalogue' render={() => <DrugsContainer/>}/>
-            <Route path='/cart' render={() => <CartContainer />}/>
+            <Route path='/catalogue' render={() => <Drugs/>}/>
+            <Route path='/cart' render={() => <Cart />}/>
         </div>
     );
 }

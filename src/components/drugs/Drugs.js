@@ -1,7 +1,7 @@
 import Drug from "./Drug";
 import {Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
 import useDrugs from "../../hooks/useDrugs";
-import {useStore} from "../../zustand-store";
+import useStore from "../../store";
 
 const Drugs = (props) => {
 

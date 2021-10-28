@@ -4,7 +4,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import {CircularProgress, Link, TextField} from "@mui/material";
 import {withRouter} from "react-router";
-import {useStore} from "../zustand-store";
+import useStore from "../store";
 import useDrugs from "../hooks/useDrugs";
 
 function debounce(func, timeout = 300){
