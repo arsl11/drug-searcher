@@ -1,11 +1,9 @@
 import {Button, Paper, Table, TableCell, TableContainer, TableRow} from "@mui/material";
-import useStore from "../../store";
+import {useCart} from "../../store";
 
 export const Cart = (props) => {
 
-    const cartDrugs = useStore(state => state.cartDrugs)
-    const deleteDrug = useStore(state => state.deleteDrug)
-    const setAmount = useStore(state => state.setAmount)
+    const {cartDrugs, setAmount, deleteDrug} = useCart()
 
     let sum = 0
     let count = 0
@@ -27,17 +25,17 @@ export const Cart = (props) => {
                                 <TableCell>{drug.liters}&nbsp;l.</TableCell>
                                 <TableCell>
                                     <Button variant='text' onClick={() => {
-                                        setAmount(drug, drug.amount + 1)
+                                        setAmount(drug.id, drug.amount + 1)
                                     }}>+
                                     </Button>
                                     {drug.amount}
                                     <Button disabled={drug.amount <= 1} variant='text' onClick={() => {
-                                        setAmount(drug, drug.amount - 1)
+                                        setAmount(drug.id, drug.amount - 1)
                                     }}>-</Button>
                                 </TableCell>
                                 <TableCell>
                                     <Button variant='contained' onClick={() => {
-                                        deleteDrug(drug)
+                                        deleteDrug(drug.id)
                                     }}>Delete
                                     </Button>
                                 </TableCell>

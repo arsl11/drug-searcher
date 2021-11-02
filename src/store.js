@@ -1,9 +1,11 @@
 import create from 'zustand'
 import {devtools, persist} from "zustand/middleware";
 
-let store = (set) => ({
+let drugsStore = (set) => ({
     searchText: '',
     setSearchText: (newSearchText) => set({searchText: newSearchText}),
+});
+let cartStore = (set) => ({
     cartDrugs: getLocalStorage('cartDrugs') || [],
     addDrug: (drug) =>
         set((state) => {
@@ -14,31 +16,31 @@ let store = (set) => ({
                 cartDrugs: [...state.cartDrugs, drug]
             }
         }),
-    deleteDrug: (drug) =>
+    deleteDrug: (drugId) =>
         set((state) => ({
             cartDrugs: [...state.cartDrugs.filter((cartDrug) => {
-                return cartDrug.id !== drug.id
+                return cartDrug.id !== drugId
             })]
         })),
-    setAmount: (drug, value) =>
+    setAmount: (drugId, value) =>
         set((state) => ({
             cartDrugs: state.cartDrugs.map((cartDrug) => {
-                if (cartDrug.id === drug.id) {
+                if (cartDrug.id === drugId && isFinite(value)) {
                     return {
                         ...cartDrug,
-                        amount: value < 1 ? 1 : value
+                        amount: Math.round(value) < 1 ? 1 : Math.round(value)
                     }
                 }
                 return cartDrug
             })
         }))
-})
+});
 
 const getLocalStorage = (key) => JSON.parse(window.localStorage.getItem(key));
 
-const useStore = create(persist((devtools(store)), {name: 'drug-store'}))
+export const useDrugList = create(devtools(drugsStore))
+export const useCart = create(persist(devtools(cartStore), {name: 'cart-store'}))
 
-export default useStore
 
 
 

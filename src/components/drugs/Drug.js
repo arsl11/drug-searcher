@@ -1,9 +1,9 @@
 import {Button, TableCell, TableRow} from "@mui/material";
-import useStore from "../../store";
+import {useCart} from "../../store";
 
 const Drug = (props) => {
 
-    const addDrug = useStore(state => state.addDrug)
+    const addDrug = useCart(state => state.addDrug)
 
     return (
         <TableRow key={props.key}>
