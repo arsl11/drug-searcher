@@ -6,6 +6,7 @@ import {CircularProgress, Link, TextField} from "@mui/material";
 import {withRouter} from "react-router";
 import {useSearch} from "../store";
 import useDrugs from "../hooks/useDrugs";
+import {useCallback} from "react";
 
 function debounce(func, timeout = 300){
     let timer;
@@ -24,6 +25,10 @@ const NavBar = (props) => {
         setSearchText(e.target.value)
     }
 
+    const debounceText = useCallback(
+        debounce(handleChange, 500), []
+    )
+
     return (
         <AppBar position="static">
             <Toolbar>
@@ -31,7 +36,7 @@ const NavBar = (props) => {
                 <Link href='/catalogue' color='inherit' underline='none' sx={{mr: 2}}>Catalogue</Link>
                 <Link href='/cart' color='inherit' underline='none' sx={{mr: 2}}>Cart</Link>
                 {props.location.pathname === '/catalogue' &&
-                    <form onChange={debounce(handleChange)}>
+                    <form onChange={debounceText}>
                         <TextField placeholder='Search...' defaultValue='' variant='standard' sx={{mr: 2}} />
                     </form>
                 }
