@@ -4,7 +4,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import {CircularProgress, Link, TextField} from "@mui/material";
 import {withRouter} from "react-router";
-import {useDrugList} from "../store";
+import {useSearch} from "../store";
 import useDrugs from "../hooks/useDrugs";
 
 function debounce(func, timeout = 300){
@@ -17,7 +17,7 @@ function debounce(func, timeout = 300){
 
 const NavBar = (props) => {
 
-    const {searchText, setSearchText} = useDrugList()
+    const {searchText, setSearchText} = useSearch()
     const {isFetching} = useDrugs(searchText)
 
     let handleChange = (e) => {

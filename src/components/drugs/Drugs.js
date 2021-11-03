@@ -1,11 +1,11 @@
 import Drug from "./Drug";
 import {Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
 import useDrugs from "../../hooks/useDrugs";
-import {useDrugList} from "../../store";
+import {useSearch} from "../../store";
 
 const Drugs = (props) => {
 
-    const searchText = useDrugList(state => state.searchText)
+    const searchText = useSearch(state => state.searchText)
 
     let {data,} = useDrugs(searchText)
 

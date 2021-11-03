@@ -1,7 +1,7 @@
 import create from 'zustand'
 import {devtools, persist} from "zustand/middleware";
 
-let drugsStore = (set) => ({
+let searchStore = (set) => ({
     searchText: '',
     setSearchText: (newSearchText) => set({searchText: newSearchText}),
 });
@@ -38,7 +38,7 @@ let cartStore = (set) => ({
 
 const getLocalStorage = (key) => JSON.parse(window.localStorage.getItem(key));
 
-export const useDrugList = create(devtools(drugsStore))
+export const useSearch = create(devtools(searchStore))
 export const useCart = create(persist(devtools(cartStore), {name: 'cart-store'}))
 
 
