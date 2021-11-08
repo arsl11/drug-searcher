@@ -7,7 +7,8 @@ type Drug = {
     priceRub: number,
     categories: Array<string>
 }
-type TFetchDrugs = (inputDrugName: string) => Promise<Drug[]>
+type TFetchDrugs = (inputDrugName: string, page: number) => Promise<Drug[]>
+type TGetPagedDrugs = (page: number) => Drug[]
 
 const initialDrugs = [
     {
@@ -55,8 +56,21 @@ const initialDrugs = [
     }
 ]
 
-let fetchDrugs: TFetchDrugs = (inputDrugName) => {
-    let filteredDrugs = initialDrugs.filter(drug => {
+const getPagedDrugs: TGetPagedDrugs = (page: number) => {
+    if (page === 1) {
+        return initialDrugs.filter(drug => {return drug.id === 1 || drug.id === 2 || drug.id === 3})
+    }
+    if (page === 2) {
+        return initialDrugs.filter(drug => {return drug.id === 4 || drug.id === 5 || drug.id === 6})
+    }
+    return initialDrugs
+}
+
+const fetchDrugs: TFetchDrugs = (inputDrugName, page) => {
+
+    let pagedDrugs = getPagedDrugs(page)
+
+    let filteredDrugs = pagedDrugs.filter(drug => {
         return drug.name.toLowerCase().includes(inputDrugName.toLowerCase())
     })
     return new Promise((resolve, reject) => {
@@ -64,7 +78,7 @@ let fetchDrugs: TFetchDrugs = (inputDrugName) => {
     })
 }
 
-export default function useDrugs(inputDrugName: string) {
+export default function useDrugs(inputDrugName: string, page: number) {
 
-    return useQuery<Drug[]>(['drugs', inputDrugName], () => fetchDrugs(inputDrugName));
+    return useQuery<Drug[]>(['drugs', inputDrugName, page], () => fetchDrugs(inputDrugName, page));
 }
