@@ -8,7 +8,7 @@ type Drug = {
     categories: Array<string>
 }
 type TFetchDrugs = (inputDrugName: string, page: number) => Promise<Drug[]>
-type TGetPagedDrugs = (page: number) => Drug[]
+type TGetPaginatedDrugs = (page: number) => Drug[]
 
 const initialDrugs = [
     {
@@ -56,22 +56,31 @@ const initialDrugs = [
     }
 ]
 
-const getPagedDrugs: TGetPagedDrugs = (page: number) => {
+const getPaginatedDrugs: TGetPaginatedDrugs = (page) => {
+    if (page === 0) {
+        return initialDrugs.filter(drug => {
+            return drug.id === 1 || drug.id === 2
+        })
+    }
     if (page === 1) {
-        return initialDrugs.filter(drug => {return drug.id === 1 || drug.id === 2 || drug.id === 3})
+        return initialDrugs.filter(drug => {
+            return drug.id === 3 || drug.id === 4
+        })
     }
     if (page === 2) {
-        return initialDrugs.filter(drug => {return drug.id === 4 || drug.id === 5 || drug.id === 6})
+        return initialDrugs.filter(drug => {
+            return drug.id === 5 || drug.id === 6
+        })
     }
     return initialDrugs
 }
 
-const fetchDrugs: TFetchDrugs = (inputDrugName, page) => {
+const fetchDrugs: TFetchDrugs = (searchText, page) => {
 
-    let pagedDrugs = getPagedDrugs(page)
+    let paginatedDrugs = getPaginatedDrugs(page)
 
-    let filteredDrugs = pagedDrugs.filter(drug => {
-        return drug.name.toLowerCase().includes(inputDrugName.toLowerCase())
+    let filteredDrugs = paginatedDrugs.filter(drug => {
+        return drug.name.toLowerCase().includes(searchText.toLowerCase())
     })
     return new Promise((resolve, reject) => {
         setTimeout(() => resolve(filteredDrugs), 1000)
@@ -79,6 +88,7 @@ const fetchDrugs: TFetchDrugs = (inputDrugName, page) => {
 }
 
 export default function useDrugs(inputDrugName: string, page: number) {
-
-    return useQuery<Drug[]>(['drugs', inputDrugName, page], () => fetchDrugs(inputDrugName, page));
+    return useQuery<Drug[]>(['drugs', inputDrugName, page], () => fetchDrugs(inputDrugName, page), {
+        staleTime: 5000
+    });
 }
