@@ -2,11 +2,10 @@ import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import {CircularProgress, Link, TextField} from "@mui/material";
+import {Link, TextField} from "@mui/material";
 import {withRouter} from "react-router";
-import {useSearch} from "../store";
-import useDrugs from "../hooks/useDrugs";
 import {useCallback} from "react";
+import {useSearch} from "../store";
 
 function debounce(func, timeout = 300){
     let timer;
@@ -19,7 +18,6 @@ function debounce(func, timeout = 300){
 const NavBar = (props) => {
 
     const {searchText, setSearchText} = useSearch()
-    const {isFetching} = useDrugs(searchText)
 
     let handleChange = (e) => {
         setSearchText(e.target.value)
@@ -40,7 +38,6 @@ const NavBar = (props) => {
                         <TextField placeholder='Search...' defaultValue='' variant='standard' sx={{mr: 2}} />
                     </form>
                 }
-                {isFetching && <CircularProgress color='secondary'/>}
             </Toolbar>
         </AppBar>
     );
